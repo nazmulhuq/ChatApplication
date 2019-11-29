@@ -11,9 +11,7 @@ namespace ChatApp
     {
         public void Announce(string message)
         {
-           
             Clients.Others.Announce(message);
-            
         }
     }
 }

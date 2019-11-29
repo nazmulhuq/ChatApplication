@@ -1,15 +1,19 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Chat Room";
 }
 
-<h1>Chat Application</h1>
+
+
+<h1>S!! Chat Room</h1>
+<div id="nameDiv" class="container">
+    <input type="text" id="name" name="name" placeholder="Type your name">
+</div>
 <div class="container">
     <h4 id="allMessages" class="text-primary"></h4>
 </div>
 
 <div class="container">
-    <input type="text" id="message" name="message">
-    <button id="click-me" type="submit" class="btn btn-info" value="type something...">>></button>
+    <textarea style="width:1500px" type="text" id="message" name="message"></textarea>
 </div>
 
 @section scripts{

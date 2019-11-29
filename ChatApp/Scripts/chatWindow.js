@@ -1,4 +1,5 @@
 ﻿(function () {
+    var userName = null;
 
     $.connection.hub.start()
         .done(function () {
@@ -6,16 +7,37 @@
         })
         .fail(function () { alert("Error..."); });
 
-    $("#click-me").click(function () {
-        var sentMessage = $("#message").val();
+    $("#message").on('keypress', function (keypress) {
 
-        $.connection.chatHub.server.announce(sentMessage);
-        $("#allMessages").append(sentMessage + "<br />");
-        $("#message").val("");
+        if (keypress.which == 13 && userName != null) {
+            var sentMessage = $("#message").val();
+
+            var dt = new Date();
+            var time = dt.getHours() + ":" + dt.getMinutes();
+
+            $.connection.chatHub.server.announce(userName + ": " + sentMessage);
+            $("#allMessages").append("you: " + sentMessage + "           " + time + "<br />" );
+            //$("#allMessages").css('color', 'blue');
+            $("#message").val("");
+        }
     })
+    $("#name").on('keypress', function (e) {
+
+        if (e.which == 13) {
+            if ($("#name").val() != "") {
+                userName = $("#name").val();
+                $("#nameDiv").hide();
+            }
+        }
+    });
 
     $.connection.chatHub.client.announce = function (message) {
-        $("#allMessages").append(message + "<br />");
+        var dt = new Date();
+        var time = dt.getHours() + ":" + dt.getMinutes();
+
+        $("#allMessages").append(message + "           " + time + "<br />");
+        //$("#allMessages").css('color', 'black');
+
     }
 
 })()
